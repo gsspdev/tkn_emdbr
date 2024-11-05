@@ -1,0 +1,10 @@
+[package]
+name = "tkn_emdbr"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+pest = "2.7.14"
+regex-automata = "0.4.8"
+regex-syntax = "0.8.5"
+serde = "1.0.214"
