@@ -1,5 +1,6 @@
+//pub mod text_processing;
+
 use std::error::Error;
-//use std::fmt::
 use std::fmt;
 
 #[derive(Debug, PartialEq)]
@@ -19,7 +20,7 @@ impl fmt::Display for TextError {
 
 impl Error for TextError {}
 
-fn validate_input(text: &str) -> Result<&str, TextError> {
+pub fn validate_input(text: &str) -> Result<&str, TextError> {
     if text.is_empty() { return Err(TextError::EmptyInput); }
     Ok(text)
 }
@@ -40,8 +41,14 @@ pub fn double_punc_paragraph(text: &str) -> String {
     text.to_string().replace("\n", ".")
 }
 
+pub fn c_to_ch(text: &str) -> String {
+    text.to_string().replace("ch", "c")
+}
+
+//use text_processing::*;
+
 #[cfg(test)]
-mod tests {
+pub mod tests {
     use super::*;
 
     #[test]
@@ -76,6 +83,13 @@ mod tests {
         let input = "This is a test.\n There should be a double period directly preceeding this sentence";
         let expected = "This is a test.. There should be a double period directly preceeding this sentence";
         assert_eq!(double_punc_paragraph(input), expected);
+    }
+
+    #[test]
+    fn test_c_to_ch() {
+        let input = "each chew";
+        let expected = "eac cew";
+        assert_eq!(c_to_ch(input), expected);
     }
 }
 
